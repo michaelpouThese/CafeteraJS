@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafetera</title>
+
+<!-- .............................................. -->
+<!-- Estilos inicio -->
+<!-- .............................................. -->
+
+<style>
+
+div#general {
+  margin-top: 18px;
+  background-color: maroon;
+  color: white;
+  padding: 10px; 
+  float: left; 
+  width: 30%; 
+  text-align: justify; 
+}
+
+div#inventarioActualizar {
+  background-color: maroon;
+  color: white;
+  padding: 10px; 
+  float: left; 
+  width: 30%; 
+  text-align: justify; 
+}
+
+div#InventarioMedio {
+	background-color: chocolate;
+	color: white;
+	padding: 10px; 
+	float: left; 
+	width: 30%; 
+	text-align: justify; 
+}
+input {
+	width:20px;
+}
+
+</style>
+
+<!-- .............................................. -->
+<!-- Estilos fin -->
+<!-- .............................................. -->
+
+</head>
+<body>
+
+<!-- .............................................. -->
+<!-- Columna 1 -->
+<!-- .............................................. -->
+<div id=general>
+    <div>
+            <h2>Estado Cafetera</h2>
+	</div>
+    <div>
+            <p id=estado></p>
+    </div>
+
+
+<!-- .............................................. -->
+
+    <div>
+        <h2>Acciones</h2>
+    </div>
+    <div>
+            <button type="button" onclick="cafeteraEjemplo.comproBebida(0)"
+            >Compro Cafe Espresso</button>
+            <br>
+            <label id=labelExpresso></label>
+    </div>
+    <br>
+    <div>
+        <button type="button" onclick="cafeteraEjemplo.comproBebida(1)"
+        >Compro Cafe Largo</button>
+        <br>
+        <label id=labelLargo></label>
+    </div>
+    <br>
+    <div>
+        <button type="button" onclick="cafeteraEjemplo.comproBebida(2)"
+        >Compro Capuccino</button>
+        <br>
+        <label id=labelCapuccino></label>
+    </div>
+</div>
+<br>
+
+<!-- .............................................. -->
+<!-- Columna 2 -->
+<!-- .............................................. -->
+<div id=InventarioMedio>
+
+    <div>
+        <h2>Inventario actual</h2>
+        <p id=inventario></p>
+    </div>
+</div>
+<!-- .............................................. -->
+
+
+<!-- .............................................. -->
+<!-- Columna 3 -->
+<!-- .............................................. -->
+<div id=inventarioActualizar>
+
+    <div>
+        <h2>Actualizar inventario</h2>
+    </div>
+    <div>
+        <button type="button" 
+        onclick="cafeteraEjemplo.inicializarInsumos()"
+        >Inicializar Inventario</button>
+    </div>
+    <br>
+    <div>
+        <label for="agua">Cantidad de agua:</label>
+        <input type="text" id="agua" name="agua" value=5>
+    </div>
+    <div>
+        <label for="leche">Cantidad de leche:</label>
+        <input type="text" id="leche" name="leche" value=5>
+    </div>
+    <div>
+        <label for="cafe">Cantidad de cafe:</label>
+        <input type="text" id="cafe" name="cafe" value=5>
+    </div>
+    <div>
+        <label for="tazas">Cantidad de tazas:</label>
+        <input type="text" id="tazas" name="tazas" value=5>
+    </div>
+    <div>
+        <label for="dinero">Cantidad de dinero:</label>
+        <input type="text" id="dinero" name="dinero" value=25>
+    </div>
+	<br><br><br><br><br><br>
+</div>
+
+<!-- .............................................. -->
+
+
+
+<!-- .............................................. -->
+<!-- .............................................. -->
+<!-- Clase JS INICIO-->
+<!-- .............................................. -->
+<script>
+
+class Cafetera2 {
+
+    constructor(agua, leche, capsulasCafe, tazas, dinero) {
+        this.agua = 0;
+        this.leche = 0;
+        this.capsulasCafe = 0;
+        this.tazas = 0;
+        this.dinero = 0;
+        this.ejecutando = true;
+        
+        this.agua = agua;
+        this.leche = leche;
+        this.capsulasCafe = capsulasCafe;
+        this.tazas = tazas;
+        this.dinero = dinero;
+
+        this.bebidas = [
+            //[bebida,        agua, leche,  cafe,   tazas,  dinero]
+            ["Cafe expresso", 1,    0,      1,      1,      5],
+            ["Cafe largo"   , 2,    0,      2,      1,      10],
+            ["Capuccino"    , 1,    1,      1,      1,      15]
+        ];
+        document.getElementById("labelExpresso").innerText = this.bebidas[0];
+        document.getElementById("labelLargo").innerText = this.bebidas[1];
+        document.getElementById("labelCapuccino").innerText = this.bebidas[2];
+    }
+
+
+    inicializarInsumos() {
+        this.agua = document.getElementById("agua").value;
+        this.leche = document.getElementById("leche").value;
+        this.capsulasCafe = document.getElementById("cafe").value;
+        this.tazas = document.getElementById("tazas").value;
+        this.dinero = document.getElementById("dinero").value;
+
+        this.despliegoInventario();
+        cafeteraEjemplo.muestroEstado("Pronta para usar\nPresione un boton")    }
+
+    despliegoInventario() {
+        document.getElementById("inventario").innerText = 
+        `Agua: ${this.agua}
+        Leche: ${this.leche}
+        Cafe: ${this.capsulasCafe} 
+        Tazas: ${this.tazas}
+        Dinero: ${this.dinero}`;
+    }
+
+    comproBebida(nro) {
+
+        this.muestroEstado("Preparando Bebida.....");
+        let aguaRequerida = this.bebidas[nro][1];
+        let lecheRequerida = this.bebidas[nro][2];
+        let cafeRequerido = this.bebidas[nro][3];
+        let tazasRequeridas = this.bebidas[nro][4];
+        let dineroRequerido = this.bebidas[nro][5];
+        if (this.agua >= aguaRequerida &&
+            this.leche >= lecheRequerida &&
+            this.capsulasCafe >= cafeRequerido &&
+            this.tazas >= tazasRequeridas &&
+            this.dinero >= dineroRequerido) {
+                this.agua -= this.bebidas[nro][1];
+                this.leche -= this.bebidas[nro][2];
+                this.capsulasCafe -= this.bebidas[nro][3];
+                this.tazas -= this.bebidas[nro][4];
+                this.dinero -= this.bebidas[nro][5];
+                this.muestroEstado(document.getElementById("estado").innerText +  
+                "\n" + "Bebida PRONTA!");
+        } else {
+                this.muestroEstado(document.getElementById("estado").innerText +  
+                "\n" + "Faltan elementos para preparar lo solicitado!");
+        }
+		// se introduce un error como ejercicio
+		if (this.dinero<=5) { this.dinero = 0; };
+		// fin del error..
+		
+		
+        this.despliegoInventario();
+    }
+
+
+
+    inventarioAdd(agua, leche, capsulas, tazas, dinero) {
+        this.agua += agua;
+        this.leche += leche;
+        this.capsulasCafe += capsulas;
+        this.tazas += tazas;
+        this.dinero += dinero;
+        this.despliegoInventario();
+    }
+
+    muestroEstado(texto) {
+        document.getElementById("estado").innerText = texto;
+    }
+
+
+}
+
+// inicio.........
+cafeteraEjemplo = new Cafetera2(0, 0, 0, 0, 0);
+cafeteraEjemplo.despliegoInventario();
+cafeteraEjemplo.muestroEstado("Pronta para usar\nPresione un boton")
+
+
+
+
+
+</script>
+
+
+<!-- .............................................. -->
+<!-- Clase JS FIN-->
+<!-- .............................................. -->
+
+
+
+
+</body>
+</html>
