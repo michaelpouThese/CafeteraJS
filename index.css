@@ -1,0 +1,41 @@
+body {
+    background: rgb(243, 241, 241);
+}
+
+.index-box {
+    background: white;
+    border-style: groove;
+    width: 25%;
+    height: 400px;
+    margin-top: 15px;
+    margin-left: 37.5%;
+    margin-right: auto;
+    text-align: center;
+}
+
+.img-logo {
+    margin-left: 39%;
+    margin-right: 41%;
+    width: 20%;
+}
+
+.index-button {
+    display: inline-block;
+    border-style: groove;
+    border-color: rgb(33, 189, 142);
+    background: rgb(26, 173, 117);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 200px;
+    margin-top: 10px; 
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+h1{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
